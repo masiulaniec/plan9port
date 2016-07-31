@@ -126,6 +126,9 @@ __xtoplan9kbd(XEvent *e)
 	/* Compensate for servers that call a minus a hyphen */
 	if(k == XK_hyphen)
 		k = XK_minus;
+	if(e->xkey.state&Mod4Mask){
+		k = Kcmd + k;
+	}
 	/* Do control mapping ourselves if translator doesn't */
 	if(e->xkey.state&ControlMask)
 		k &= 0x9f;
