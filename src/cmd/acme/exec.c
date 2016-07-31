@@ -652,7 +652,7 @@ putfile(File *f, int q0, int q1, Rune *namer, int nname)
 	d = dirstat(name);
 	if(d!=nil && runeeq(namer, nname, f->name, f->nname)){
 		/* f->mtime+1 because when talking over NFS it's often off by a second */
-		if(f->dev!=d->dev || f->qidpath!=d->qid.path || abs(f->mtime-d->mtime) > 1){
+		if(f->dev!=d->dev || abs(f->mtime-d->mtime) > 1){
 			if(f->unread)
 				warning(nil, "%s not written; file already exists\n", name);
 			else
@@ -719,8 +719,10 @@ putfile(File *f, int q0, int q1, Rune *namer, int nname)
 			// in case we don't have read permission.
 			// (The create above worked, so we probably
 			// still have write permission.)
-			close(fd);
-			fd = open(name, OWRITE);
+			//
+			// BUG(jacekm): commented out to see if Put bugs on sshfs are resolved.
+			//close(fd);
+			//fd = open(name, OWRITE);
 
 			d1 = dirfstat(fd);
 			if(d1 != nil){
