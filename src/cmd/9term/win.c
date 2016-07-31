@@ -546,6 +546,10 @@ stdoutproc(void *v)
 		n = dropcrnl(buf+npart, n);
 		if(n == 0)
 			continue;
+
+		n = dropesc(buf+npart, n);
+		if(n == 0)
+			continue;
 		
 		n = dropcr(buf+npart, n);
 		if(n == 0)

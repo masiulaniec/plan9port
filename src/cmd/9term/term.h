@@ -10,4 +10,5 @@ extern int loginshell;
 extern void echoed(char*, int);
 extern int echocancel(char*, int);
 extern int dropcrnl(char*, int);
+extern int dropesc(char*, int);
 extern const char *termprog;

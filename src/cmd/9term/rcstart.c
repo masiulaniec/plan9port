@@ -188,3 +188,40 @@ dropcrnl(char *p, int n)
 	}
 	return w-p;
 }
+
+int
+dropesc(char *p, int n)
+{
+	char *r, *w;
+
+	for(r=w=p; r<p+n; r++) {
+		if(*r==0x1b){
+			if(r+2<p+n && *(r+1) == ']' && *(r+2) == ';') {
+				goto ok;
+			}
+			if(r+2<p+n && *(r+2) == 'm'){
+				r += 2;
+				continue;
+			}
+			if(r+3<p+n && *(r+3) == 'm'){
+				r += 3;
+				continue;
+			}
+			if(r+4<p+n && *(r+4) == 'm'){
+				r += 4;
+				continue;
+			}
+			if(r+6<p+n && *(r+6) == 'm'){
+				r += 6;
+				continue;
+			}
+			if(r+7<p+n && *(r+7) == 'm'){
+				r += 7;
+				continue;
+			}
+		}
+		ok:
+		*w++ = *r;
+	}
+	return w-p;
+}
