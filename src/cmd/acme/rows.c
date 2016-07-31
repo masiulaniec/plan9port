@@ -15,9 +15,9 @@
 static Rune Lcolhdr[] = {
 	'N', 'e', 'w', 'c', 'o', 'l', ' ',
 	'K', 'i', 'l', 'l', ' ',
-	'P', 'u', 't', 'a', 'l', 'l', ' ',
 	'D', 'u', 'm', 'p', ' ',
 	'E', 'x', 'i', 't', ' ',
+	'P', 'u', 't', 'a', 'l', 'l',
 	0
 };
 
@@ -42,7 +42,7 @@ rowinit(Row *row, Rectangle r)
 	r1.min.y = r1.max.y;
 	r1.max.y += Border;
 	draw(screen, r1, display->black, nil, ZP);
-	textinsert(t, 0, Lcolhdr, 29, TRUE);
+	textinsert(t, 0, Lcolhdr, 28, TRUE);
 	textsetselect(t, t->file->b.nc, t->file->b.nc);
 }
 
