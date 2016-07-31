@@ -364,6 +364,16 @@ _xattach(char *label, char *winsize)
 	XChangeProperty(_x.display, _x.drawable, _x.wmprotos, XA_ATOM, 32,
 		PropModeReplace, (uchar*)atoms, 2);
 
+
+	{
+		unsigned long pid = (unsigned long)getpid();
+		XChangeProperty(_x.display, _x.drawable,
+			XInternAtom(_x.display, "_NET_WM_PID", False),
+			XA_CARDINAL, 32, PropModeReplace,
+			(unsigned char *) &pid, 1);
+	}
+
+
 	/*
 	 * Put the window on the screen, check to see what size we actually got.
 	 */
